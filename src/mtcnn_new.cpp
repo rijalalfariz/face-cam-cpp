@@ -2,6 +2,9 @@
 using namespace std;
 using namespace cv;
 #include "livefacereco.hpp"
+#include <curl/curl.h>
+#include <jsoncpp/json/json.h>
+
 
 
 bool cmpScore(orderScore lsh, orderScore rsh){
@@ -150,7 +153,8 @@ void mtcnn::refineAndSquareBbox(vector<Bbox> &vecBbox, const int &height, const 
         }
     }
 }
-void mtcnn::detect(ncnn::Mat& img_, std::vector<Bbox>& finalBbox_){
+
+void mtcnn::detect(ncnn::Mat& img_, std::vector<Bbox>& finalBbox_, float minface){
     firstBbox_.clear();
     firstOrderScore_.clear();
     secondBbox_.clear();
@@ -164,8 +168,8 @@ void mtcnn::detect(ncnn::Mat& img_, std::vector<Bbox>& finalBbox_){
     img.substract_mean_normalize(mean_vals, norm_vals);
 
     float minl = img_w<img_h?img_w:img_h;
-    int MIN_DET_SIZE = 12;
-    int minsize = 90;
+    float MIN_DET_SIZE = 12;
+    float minsize = minface;
     float m = (float)MIN_DET_SIZE/minsize;
     minl *= m;
     float factor = 0.709;
@@ -293,14 +297,14 @@ void mtcnn::detect(ncnn::Mat& img_, std::vector<Bbox>& finalBbox_){
 }
     mtcnn mm;
     
-std::vector<Bbox> detect_mtcnn(const cv::Mat &cv_img)
+std::vector<Bbox> detect_mtcnn(const cv::Mat &cv_img, const float minface)
 {
     ncnn::Mat ncnn_img = ncnn::Mat::from_pixels(cv_img.data, ncnn::Mat::PIXEL_BGR2RGB, cv_img.cols, cv_img.rows);
     struct timeval  tv1,tv2;
     struct timezone tz1,tz2;
     gettimeofday(&tv1,&tz1);
     std::vector<Bbox> finalBbox;
-    mm.detect(ncnn_img, finalBbox);
+    mm.detect(ncnn_img, finalBbox, minface);
     gettimeofday(&tv2,&tz2);
     //printf( "%s = %g ms \n ", "Detection All time", getElapse(&tv1, &tv2) );
     return finalBbox;

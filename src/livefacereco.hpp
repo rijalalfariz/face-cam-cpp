@@ -25,23 +25,28 @@
 using namespace std;
 using namespace cv;
 
+
+
 // Adjustable Parameters
-const bool largest_face_only=true;
+const bool largest_face_only=false;
 const bool record_face=false;
-const int distance_threshold = 90;
-const float face_thre=0.40;
-const float true_thre=0.89;
+const int distance_threshold = 10;
 const int jump=10;
-const int input_width = 320;
-const int input_height = 240;
-const int output_width = 320;
-const int output_height = 240;
-const string project_path="/home/pi/project/LiveFaceReco_RaspberryPi";
+
+const float face_thre_def =0.40;
+const float true_thre_def =0.60;
+const int input_width_def = 640;
+const int input_height_def = 360;
+const int min_face_size_def = input_height_def*15/100;
+
+const int output_width = 640;
+const int output_height = 360;
+const string project_path="/home/pi/FileVNC/coba/CPPMFN2/CPP20fps/LiveFaceReco_RaspberryPi";
 //end
 
 const cv::Size frame_size = Size(output_width,output_height);
-const float ratio_x = (float)output_width/ input_width;
-const float ratio_y = (float)output_height/ input_height;
+const float ratio_x = (float)output_width/ input_width_def;
+const float ratio_y = (float)output_height/ input_height_def;
 
 
 int MTCNNDetection();

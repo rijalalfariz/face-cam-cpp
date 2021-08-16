@@ -5,9 +5,17 @@ SET(CMAKE_CXX_STANDARD 11)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -ldl -lpthread")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -ldl -lpthread -ljsoncpp")
+
+if(WIN32)
+    add_definitions("-DCURL_STATICLIB")
+endif()
+set(CURL_LIBRARY "-lcurl") 
+find_package(CURL REQUIRED) 
+include_directories(${CURL_INCLUDE_DIR})
 
 LINK_DIRECTORIES(${HOME_TVM}/build)
+
 
 #select the corresponding lib file
 #LINK_DIRECTORIES(${CMAKE_CURRENT_LIST_DIR}/include/libs/ubuntu)
@@ -45,4 +53,4 @@ ADD_LIBRARY(facedetect STATIC
 
 ADD_EXECUTABLE(LiveFaceReco src/main.cpp)
 #TARGET_LINK_LIBRARIES(LiveFaceReco ${OpenCV_LIBS} ${NCNN_LIB} facedetect libncnn.a)
-TARGET_LINK_LIBRARIES(LiveFaceReco ${OpenCV_LIBS} facedetect libncnn.a)
+TARGET_LINK_LIBRARIES(LiveFaceReco ${OpenCV_LIBS} ${CURL_LIBRARIES} facedetect libncnn.a)

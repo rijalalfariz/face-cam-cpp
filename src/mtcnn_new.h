@@ -45,7 +45,7 @@ static float getElapse(struct timeval *tv1,struct timeval *tv2)
 class mtcnn{
 public:
     mtcnn();
-    void detect(ncnn::Mat& img_, std::vector<Bbox>& finalBbox);
+    void detect(ncnn::Mat& img_, std::vector<Bbox>& finalBbox, float minface);
 private:
     void generateBbox(ncnn::Mat score, ncnn::Mat location, vector<Bbox>& boundingBox_, vector<orderScore>& bboxScore_, float scale);
     void nms(vector<Bbox> &boundingBox_, std::vector<orderScore> &bboxScore_, const float overlap_threshold, string modelname="Union");
@@ -62,5 +62,5 @@ private:
     std::vector<orderScore> firstOrderScore_, secondBboxScore_, thirdBboxScore_;
     int img_w, img_h;
 };
-std::vector<Bbox> detect_mtcnn(const cv::Mat &cv_img);
+std::vector<Bbox> detect_mtcnn(const cv::Mat &cv_img, float minface);
 #endif //MTCNN
