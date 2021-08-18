@@ -1,5 +1,6 @@
 //
 // Created by Xinghao Chen 2020/7/27
+// Edited by M Rijal Al Fariz 2021/5
 //
 #include <iostream>
 #include <stdio.h>
@@ -41,7 +42,7 @@ const int min_face_size_def = input_height_def*15/100;
 
 const int output_width = 640;
 const int output_height = 360;
-const string project_path="/home/pi/FileVNC/coba/CPPMFN2/CPP20fps/LiveFaceReco_RaspberryPi";
+const string project_path="/<YOUR_PATH>/face-cam-cpp";
 //end
 
 const cv::Size frame_size = Size(output_width,output_height);
