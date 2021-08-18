@@ -80,7 +80,7 @@ inline cv::Mat draw_conclucion(String intro, double input, cv::Mat result_cnn, i
 }
 
 void getCamParam(){
-    const std::string url("http://192.168.43.179:8000/test-api-view/1/?format=json");
+    const std::string url("http://<YOUR_HOST>/test-api-view/1/?format=json");
     CURL* curl = curl_easy_init();
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     curl_easy_setopt(curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
@@ -309,7 +309,7 @@ int MTCNNDetection(){
             if (pegawai_itter < pegawai_itter_api) {
 
                 for(std::vector<std::string>::iterator itr=list_nip.begin();itr!=list_nip.end();++itr){
-                    std::string url_nip = "192.168.43.179:8000/media/faceimg/"+*itr+".jpg";
+                    std::string url_nip = "<YOUR_HOST>/media/faceimg/"+*itr+".jpg";
                     cv::Mat img_pegawai = download_jpeg(&url_nip[0]);
                     cv::flip (img_pegawai,img_pegawai,1);
                     vector<Bbox> faceInfoRecord = detect_mtcnn(img_pegawai, min_face_size);
@@ -447,7 +447,7 @@ int MTCNNDetection(){
                         curl = curl_easy_init();
 
                         if(curl) {
-                            curl_easy_setopt(curl, CURLOPT_URL, "http://192.168.43.179:8000/absensi-api-view/");
+                            curl_easy_setopt(curl, CURLOPT_URL, "http://<YOUR_HOST>/absensi-api-view/");
                             curl_easy_setopt(curl, CURLOPT_POSTFIELDS, hi_name.c_str());
                             res = curl_easy_perform(curl);
 

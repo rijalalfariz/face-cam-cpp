@@ -1,14 +1,14 @@
-# **LiveFaceReco_RaspberryPi**
+# **Face Recognition Attendance System**
 
 ```
 Attendance System Using Face Recognition with NCNN
 ```
 
-This projects run in Raspberry pi 3 up to 10+ fps, connected with django-restframework to MIS website for attendance maagement and information built with django.
+This projects run in Raspberry pi 3 up to 10+ fps, connected with django-restframework to MIS website for attendance maagement and information built with django (see [MIS Website Repo](https://github.com/rijalalfariz/face-attendance-admin)).
 
 ---
 
-## Dependency
+## Dependencies
 
 - OpenCV
 - libcurl
@@ -18,8 +18,15 @@ This projects run in Raspberry pi 3 up to 10+ fps, connected with django-restfra
 
 ## Run
 
+Camera Runs in Raspbian OS on Raspberry Pi 3B (or better)
+
+Install Dependencies
+Run Webserver (see [MIS Website Repo](https://github.com/rijalalfariz/face-attendance-admin))
+Add some employee picture on webserver (it sends to `img/` folder) to try recognition performance
+change `src/livefacereco.cpp(83, 312, 450) > YOUR_HOST` to your own host (for localhost, use your computer's ip address)
 change  `src/livefacereco.hpp(45) > project_path` to your own
 
+After step above, run:
 ```shell
 mkdir build
 cd build
