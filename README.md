@@ -4,7 +4,7 @@
 Attendance System Using Face Recognition with NCNN
 ```
 
-This projects run in Raspberry pi 3 up to 10+ fps, connected with django-restframework to MIS website for attendance maagement and information built with django (see [MIS Website Repo](https://github.com/rijalalfariz/face-attendance-admin)).
+This projects run in Raspberry pi 3 up to 10+ fps, connected with django-restframework (Python) to MIS website for attendance maagement and information built with django (see [MIS Website Repo](https://github.com/rijalalfariz/face-attendance-admin)).
 
 ---
 
